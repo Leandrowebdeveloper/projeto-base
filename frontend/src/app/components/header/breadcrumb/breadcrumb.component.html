@@ -1,0 +1,33 @@
+<ion-header
+  class="ion-no-border"
+  [collapse]="hasIos ? 'condense' : 'fade'"
+  [translucent]="hasIos"
+  #breadcrumb
+>
+  <ion-toolbar color="light">
+    <ion-breadcrumbs mode="md">
+      <ion-breadcrumb
+        *ngFor="
+          let breadcrumb of breadcrumbs$ | async;
+          let i = index;
+          last as Last
+        "
+        active="true"
+        separator="true"
+        [href]="breadcrumb?.link"
+        [rel]="breadcrumb?.label | titlecase"
+        routerDirection="forward"
+        [title]="breadcrumb?.label | titlecase"
+      >
+        {{ breadcrumb?.label | titlecase | lnWords }}
+        <!-- <br>
+        {{ breadcrumb | json }} -->
+        <ion-icon
+          [hidden]="Last"
+          slot="separator"
+          name="chevron-forward-outline"
+        ></ion-icon>
+      </ion-breadcrumb>
+    </ion-breadcrumbs>
+  </ion-toolbar>
+</ion-header>

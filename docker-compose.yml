@@ -1,0 +1,53 @@
+version: "3.9"
+
+services:
+  postgres-superloja:
+    image: postgres
+    restart: always
+    container_name: db-superloja
+    environment:
+      POSTGRES_USER: "superloja"
+      POSTGRES_PASSWORD: "zaq123XSW"
+      POSTGRES_DB: "superloja"
+    ports:
+      - "5431:5432"
+    expose:
+      - 5432
+    volumes:
+      - ./data:/var/lib/docker/volumes/dbdata/_data
+    networks:
+      - superloja
+
+  pgadmin-superloja:
+    image: dpage/pgadmin4
+    container_name: pgadmin-superloja
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "leandro.web.developer.10@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "zaq123XSW@#"
+    ports:
+      - "3001:80"
+    depends_on:
+      - postgres-superloja
+    networks:
+      - superloja
+
+    # server-montes-belos:
+    #   build:
+    #     context: ./backend
+    #   ports:
+    #     - 3001:3001
+    # environment:
+    #   - DB_DIALECT=postgres
+    #   - DB_NAME=guia_de_anuncios_montes_belos
+    #   - DB_USERNAME=guia_de_anuncios
+    #   - DB_PASSWORD="zaq123XSW"
+    #   - DB_HOSTNAME=postgres-compose
+    #   - DB_PORT=5432
+    # depends_on:
+    #   - postgres-compose
+    # networks:
+    #   - guia-de-anuncios
+
+networks:
+  superloja:
+    driver: bridge
