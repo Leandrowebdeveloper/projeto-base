@@ -1,2 +1,3 @@
-# super-modas
-Loja e catalogo de produtos
+# Projeto base
+#### Frontend Ionic 
+#### Backend Express 
